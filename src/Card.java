@@ -1,24 +1,24 @@
 public class Card implements Comparable<Card>
 {
-    //implementing comparable class allows for easy sorting
-    //only three face cards K, Q, J
-    public int face;
+//implementing comparable class allows for easy sorting
+//only three face cards K, Q, J
+public int face;
 
 
 
-    public int compareTo(Card o)
-    {
+public int compareTo(Card o)
+        {
         if (this.face == (o.face))
-            return 0;
+        return 0;
         else if ((this.face) > (o.face))
-            return 1;
+        return 1;
         else
-            return -1;
-    }
+        return -1;
+        }
 
-    public int display(Card o)
-    {
+public int display(Card o)
+        {
         return o.face;
-    }
+        }
 
-}/**/
+        }/**/

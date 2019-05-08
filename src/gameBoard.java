@@ -1,5 +1,8 @@
+//Michael Peters and Jackson Ricks
+//CPSC224 Final Project
+//04.29.19
+
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +27,7 @@ public class gameBoard extends JPanel {
     public JButton check;
     public JButton call;
     public JButton raise;
-    public JButton com;
+    private JButton com;
     public JLabel pot_display;
     public JLabel turnIndicator;
     public JLabel player = new JLabel("Player: 19");
@@ -58,17 +61,6 @@ public class gameBoard extends JPanel {
 
         JPanel buttons = new JPanel();
           buttons.setLayout(new GridLayout(1,4));
-//        buttons.setSize(600,100);
-//        choices = new JButton[4];
-//        choices[0] = new JButton("Check");
-//        choices[1] = new JButton("Raise");
-//        choices[2] = new JButton("Fold");
-//        choices[3] = new JButton("Computer");
-//        for (int v = 0; v<= 3; v++)
-//        {
-//            choices[v].addActionListener(new ButtonListener());
-//            buttons.add(choices[v]);
-//        }
 
 
         JPanel[][] panelHolder = new JPanel[i][j];
@@ -83,10 +75,6 @@ public class gameBoard extends JPanel {
                 add(panelHolder[m][n]);
             }
         }
-        //setLayout(new GridLayout(3,3));
-        //Player player = new Player();
-//        JLabel table = new JLabel(new ImageIcon("images/poker-table-layout.jpg"));
-//        add(table);
 
         //here
         ImageIcon imageIcon = new ImageIcon(this.getClass().getResource("images/JH.png")); // load the image to a imageIcon
@@ -132,6 +120,7 @@ public class gameBoard extends JPanel {
         JPanel cards = new JPanel();
         cards.setLayout(new GridLayout());
         cards.setBackground(board);
+        cards.add(rBack_display);
         //evaluate(hand);
         if ((hand.face) == 1)
         {
@@ -151,7 +140,7 @@ public class gameBoard extends JPanel {
             cards.add(display);
             System.out.println("king");
         }
-        cards.add(rBack_display);
+
         cards.add(gBack_display);
 
         //add(rBack_display, BorderLayout.LINE_START);
@@ -215,16 +204,6 @@ public class gameBoard extends JPanel {
         info.add(pot_display);
         info.add(player);
         info.add(computer);
-//        main.add(reset);
-//        main.add(newGame);
-//        main.add(exit);
-//
-//        statusLabel.setHorizontalAlignment(SwingConstants.LEFT);
-//        status.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
-//        status.add(statusLabel);
-//        pack();
-//        add(main, BorderLayout.CENTER);
-//        add(status, BorderLayout.SOUTH);
         add(buttons, BorderLayout.PAGE_END);
         info.add(turnIndicator);
         add(info, BorderLayout.PAGE_START);
@@ -469,20 +448,11 @@ public class gameBoard extends JPanel {
                 }
             }
 
-
-            //}
-
-
-
-            //actionperformed bracket
         }
     }
     public void updateScore()
     {
-        //timer = new Timer(delay, this);
-        //timer.start();
-        //timer = new Timer(100000, new ActionListener());
-        //timer.start();
+
         String new_money;
         text = String.format("Pot: %02d", pot);
         pot_display.setText(text);
@@ -490,16 +460,11 @@ public class gameBoard extends JPanel {
         computer.setText(new_money);
         new_money = String.format("Human: %02d", money);
         player.setText(new_money);
-        //timer = new Timer();
-        //timer.setInitialDelay(5000);
-        //timer.stop();
     }
 
     public void winConditions()
     {
-        //timer = new Timer(delay, this);
-        //timer.start();
-        //timer.start();
+
         hum_card = hand.face;
         System.out.println(hum_card);
         com_card = com_Hand.face;
@@ -515,6 +480,17 @@ public class gameBoard extends JPanel {
             com_money += pot;
             pot = 0;
             turn = 1;
+        }
+        if (money <= 0) {
+
+            JOptionPane.showMessageDialog(null, "Computer wins");
+            money = 20;
+            com_money = 20;
+        }
+        else if(com_money <= 0){
+            JOptionPane.showMessageDialog(null, "Player wins");
+            money = 20;
+            com_money = 20;
         }
         updateScore();
         if (com_Hand.face == 1)
